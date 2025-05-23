@@ -1,0 +1,59 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <title>Lesson 3</title>
+  </head>
+  <body>
+    <div class="js-container"></div>
+
+    <script src="https://unpkg.com/supersimpledev/react.js"></script>
+    <script src="https://unpkg.com/supersimpledev/react-dom.js"></script>
+
+    <script src="https://unpkg.com/supersimpledev/babel.js"></script>
+    <script type="text/babel">
+      // returns the button object with logic that shows how many times the button was clicked within the button text
+      function ClickedButton({ count, setCount }) {
+        // increases setCount by 1 using temp var prevCount
+        function saveClickCounter() {
+          setCount((prevCount) => Number(prevCount) + 1);
+        }
+
+        return (
+          <div>
+            <button onClick={saveClickCounter}>
+              Clicked {count ? count : 0} {count === 1 ? 'time' : 'times'}
+            </button>
+          </div>
+        );
+      }
+
+      function ResetButton({ setCount }) {
+        function setresetCount() {
+          setCount(0);
+        }
+
+        return (
+          <div>
+            <button onClick={setresetCount}>Reset</button>
+          </div>
+        );
+      }
+
+      function App() {
+        // useState to track (setCount) how many times (count) the button was clicked
+        const [count, setCount] = React.useState('');
+
+        return (
+          <>
+            <ClickedButton count={count} setCount={setCount} />
+            <ClickedButton count={count} setCount={setCount} />
+            <ResetButton setCount={setCount} />
+          </>
+        );
+      }
+
+      const container = document.querySelector('.js-container');
+      ReactDOM.createRoot(container).render(<App />);
+    </script>
+  </body>
+</html>

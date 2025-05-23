@@ -15,12 +15,26 @@
     <script type="text/babel">
       function ChatInput({ chatMessages, setChatMessages }) {
         const [inputText, setInputText] = React.useState('');
+        const [isLoading, setIsLoading] = React.useState(false);
 
         function saveInputText(event) {
-          setInputText(event.target.value); // Uses React to save changes made within the input
+          setInputText(event.target.value); // uses the onClick event to trigger a get on the input field's value and save the value to setInputText
         }
 
-        function sendMessage() {
+        function isEnterKey(event) {
+          return event.key === 'Enter'
+            ? sendMessage()
+            : event.key === 'Escape'
+            ? setInputText('')
+            : undefined;
+        }
+
+        async function sendMessage() {
+          if (isLoading || inputText === '') {
+            return;
+          }
+
+          setIsLoading(true);
           const newChatMessages = [
             ...chatMessages,
             {
@@ -30,9 +44,19 @@
             },
           ];
 
-          setChatMessages(newChatMessages);
+          setInputText(''); // resets the input text to empty
 
-          const response = Chatbot.getResponse(inputText);
+          setChatMessages([
+            ...newChatMessages,
+            {
+              message: 'Loading...',
+              sender: 'robot',
+              id: crypto.randomUUID(),
+            },
+          ]);
+
+          const response = await Chatbot.getResponseAsync(inputText);
+
           setChatMessages([
             ...newChatMessages,
             {
@@ -42,7 +66,7 @@
             },
           ]);
 
-          setInputText(''); // resets the input text to empty
+          setIsLoading(false);
         }
 
         return (
@@ -52,6 +76,7 @@
               size='30'
               onChange={saveInputText}
               value={inputText}
+              onKeyDown={isEnterKey}
             />
             <button onClick={sendMessage}>Send</button>
           </>
