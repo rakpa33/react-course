@@ -1,0 +1,50 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <title>React Basics</title>
+
+    <style>
+      button {
+        background: rgb(25, 135, 84);
+        color: white;
+        padding: 10px 15px;
+        border: none;
+        border-radius: 10px;
+      }
+      .button-off {
+        background: rgb(220, 53, 69);
+      }
+    </style>
+  </head>
+  <body>
+    <div class="js-container"></div>
+
+    <script src="https://unpkg.com/supersimpledev/react.js"></script>
+    <script src="https://unpkg.com/supersimpledev/react-dom.js"></script>
+
+    <script src="https://unpkg.com/supersimpledev/babel.js"></script>
+    <script type="text/babel">
+      function App() {
+        const [isButtonOn, stateIsButtonOn] = React.useState(true);
+
+        function toggleButton() {
+          isButtonOn ? stateIsButtonOn(false) : stateIsButtonOn(true);
+        }
+
+        const button = (
+          <button
+            onClick={toggleButton}
+            className={!isButtonOn ? 'button-off' : ''}
+          >
+            {isButtonOn ? 'ON' : 'OFF'}
+          </button>
+        );
+
+        return <>{button}</>;
+      }
+
+      const container = document.querySelector('.js-container');
+      ReactDOM.createRoot(container).render(<App />);
+    </script>
+  </body>
+</html>
