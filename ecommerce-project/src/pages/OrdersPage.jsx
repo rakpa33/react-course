@@ -1,4 +1,4 @@
-import { Link } from 'react'
+import { Link } from 'react-router'
 import { Header } from '../components/Header'
 import BuyAgainIcon from '../assets/images/icons/buy-again.png'
 import './OrdersPage.css'

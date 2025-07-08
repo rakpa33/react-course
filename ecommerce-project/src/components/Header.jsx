@@ -29,7 +29,6 @@ export function Header() {
 
         <div className="right-section">
           <NavLink className="orders-link header-link" to="/orders">
-
             <span className="orders-text">Orders</span>
           </NavLink>
 

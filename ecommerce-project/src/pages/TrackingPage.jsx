@@ -1,4 +1,4 @@
-import { Link } from 'react'
+import { Link } from 'react-router'
 import { Header } from '../components/Header'
 import '../components/Header.css'
 import './TrackingPage.css'
