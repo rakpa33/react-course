@@ -4,6 +4,14 @@ import { products } from '../../starting-code/data/products'
 import './homePage.css';
 
 export function HomePage() {
+  // fetches data from backend url
+  fetch('http://localhost:3000/api/products').then((response) => {
+    // waits for a response back from backend
+    return response.json()
+  }).then((data) => {
+    console.log(data);
+  })
+
   return (
     <>
       <title>Ecommerse Project</title>
