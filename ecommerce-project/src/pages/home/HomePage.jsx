@@ -7,13 +7,15 @@ import './homePage.css';
 export function HomePage({ cart }) {
   const [products, setProducts] = useState([]);
 
-  // useEffect fetches data once when HomePage loads
+  // useEffect fetches data once when HomePage loads using async await
   useEffect(() => {
-    // fetches data from backend url using axios
-    axios.get('/api/products').then((response) => {
-      // waits for a response back from backend
+    const getHomeData = async () => {
+      // fetches data from backend url using axios
+      const response = await axios.get('/api/products');
       setProducts(response.data);
-    })
+    };
+
+    getHomeData();
   }, []);
 
   return (
