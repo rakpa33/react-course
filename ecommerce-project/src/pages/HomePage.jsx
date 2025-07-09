@@ -6,6 +6,7 @@ import './homePage.css';
 
 export function HomePage() {
   const [products, setProducts] = useState([]);
+  const [cart, setCart] = useState([]);
 
   // useEffect fetches data once when HomePage loads
   useEffect(() => {
@@ -14,16 +15,19 @@ export function HomePage() {
       // waits for a response back from backend
       setProducts(response.data);
     });
+
+    // fetches the cart
+    axios.get('http://localhost:3000/api/cart-items/').then((response) => {
+      setCart(response.data);
+    });
   }, []);
-
-
 
   return (
     <>
       <title>Ecommerse Project</title>
       <link rel="icon" type="image/svg+xml" href="home-favicon.png" />
 
-      <Header />
+      <Header cart={cart} />
 
       <div className="home-page">
         <div className="products-grid">
