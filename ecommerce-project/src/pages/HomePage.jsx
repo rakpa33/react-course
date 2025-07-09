@@ -1,15 +1,14 @@
+import axios from 'axios'
 import { Header } from '../components/Header'
 import CheckmarkIcon from '../assets/images/icons/checkmark.png'
 import { products } from '../../starting-code/data/products'
 import './homePage.css';
 
 export function HomePage() {
-  // fetches data from backend url
-  fetch('http://localhost:3000/api/products').then((response) => {
+  // fetches data from backend url using axios
+  axios.get('http://localhost:3000/api/products').then((response) => {
     // waits for a response back from backend
-    return response.json()
-  }).then((data) => {
-    console.log(data);
+    console.log(response.data);
   })
 
   return (
