@@ -4,9 +4,9 @@ import { Header } from '../components/Header'
 import CheckmarkIcon from '../assets/images/icons/checkmark.png'
 import './homePage.css';
 
-export function HomePage() {
+export function HomePage({ cart }) {
   const [products, setProducts] = useState([]);
-  const [cart, setCart] = useState([]);
+
 
   // useEffect fetches data once when HomePage loads
   useEffect(() => {
@@ -14,12 +14,7 @@ export function HomePage() {
     axios.get('/api/products').then((response) => {
       // waits for a response back from backend
       setProducts(response.data);
-    });
-
-    // fetches the cart
-    axios.get('/api/cart-items/').then((response) => {
-      setCart(response.data);
-    });
+    })
   }, []);
 
   return (
