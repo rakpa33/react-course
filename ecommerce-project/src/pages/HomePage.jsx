@@ -11,13 +11,13 @@ export function HomePage() {
   // useEffect fetches data once when HomePage loads
   useEffect(() => {
     // fetches data from backend url using axios
-    axios.get('http://localhost:3000/api/products').then((response) => {
+    axios.get('/api/products').then((response) => {
       // waits for a response back from backend
       setProducts(response.data);
     });
 
     // fetches the cart
-    axios.get('http://localhost:3000/api/cart-items/').then((response) => {
+    axios.get('/api/cart-items/').then((response) => {
       setCart(response.data);
     });
   }, []);
