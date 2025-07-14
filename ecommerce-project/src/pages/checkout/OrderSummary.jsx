@@ -9,7 +9,7 @@ export function OrderSummary({ deliveryOptions, cart }) {
 
         return (
           <div key={cartItem.productId} className="cart-item-container">
-            <DeliveryDate />
+            <DeliveryDate cartItem={cartItem} />
 
             <div className="cart-item-details-grid">
               <CartItemDetails cartItem={cartItem} />
