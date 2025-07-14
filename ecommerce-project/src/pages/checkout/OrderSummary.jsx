@@ -3,8 +3,6 @@ import { CartItemDetails } from './CartItemDetails';
 import { DeliveryDate } from './DeliveryDate';
 
 export function OrderSummary({ deliveryOptions, cart }) {
-  console.log(cart.quantity);
-  console.log(cart);
   return (
     <div className="order-summary">
       {cart.map((cartItem) => {
