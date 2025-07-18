@@ -6,7 +6,7 @@ export function CartItemDetails({ cartItem, loadCart }) {
   const [showQuantityInput, setShowQuantityInput] = useState(false);
   const [quantity, setQuantity] = useState(cartItem.quantity);
 
-  const toggleShowQuantityInput = async (quantity) => {
+  const toggleShowQuantityInput = async () => {
     if (showQuantityInput) {
       await axios.put(`api/cart-items/${cartItem.productId}`, { quantity: Number(quantity) });
       await loadCart();
@@ -18,12 +18,20 @@ export function CartItemDetails({ cartItem, loadCart }) {
 
   const updateQuantityInput = (event) => {
     setQuantity(event.target.value);
-    console.log(quantity);
   };
 
   const deleteCartItem = async () => {
     await axios.delete(`/api/cart-items/${cartItem.productId}`);
     await loadCart();
+  };
+
+  const keyQuantityInput = (event) => {
+    if (event.key === 'Enter') {
+      toggleShowQuantityInput();
+    } else if (event.key === 'Escape') {
+      setQuantity(cartItem.quantity);
+      setShowQuantityInput(false);
+    }
   };
 
   return (
@@ -40,10 +48,10 @@ export function CartItemDetails({ cartItem, loadCart }) {
         </div>
         <div className="product-quantity">
           <span>
-            Quantity: {showQuantityInput ? <input className="update-quantity-input" type="text" defaultValue={quantity} onChange={updateQuantityInput} /> : <span className="quantity-label" value={quantity}>{cartItem.quantity}</span>
+            Quantity: {showQuantityInput ? <input className="update-quantity-input" type="text" defaultValue={quantity} onChange={updateQuantityInput} onKeyDown={keyQuantityInput} /> : <span className="quantity-label" value={quantity}>{cartItem.quantity}</span>
             }
           </span>
-          <span className="update-quantity-link link-primary" onClick={() => { toggleShowQuantityInput(quantity) }}>
+          <span className="update-quantity-link link-primary" onClick={toggleShowQuantityInput}>
             Update
           </span>
           <span className="delete-quantity-link link-primary" onClick={deleteCartItem}>
