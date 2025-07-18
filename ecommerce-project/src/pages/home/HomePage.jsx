@@ -5,6 +5,8 @@ import { ProductsGrid } from './ProductsGrid';
 import './homePage.css';
 
 export function HomePage({ cart, loadCart }) {
+  window.axios = axios; //allows me to reset the backend
+
   const [products, setProducts] = useState([]);
 
   // useEffect fetches data once when HomePage loads using async await
