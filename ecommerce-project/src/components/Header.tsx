@@ -7,7 +7,15 @@ import SearchIcon from '../assets/images/icons/search-icon.png';
 import LogoWhite from '../assets/images/logo-white.png';
 import MobileLogoWhite from '../assets/images/mobile-logo-white.png';
 
-export function Header({ cart }) {
+type HeaderProps = {
+  cart:{
+    productId: string;
+    quantity: number;
+    deliveryOptionId: string;
+  }[];
+}
+
+export function Header({ cart }: HeaderProps) {
   const navigate = useNavigate();
 
   let totalQuantity = cartTotal({ cart });
